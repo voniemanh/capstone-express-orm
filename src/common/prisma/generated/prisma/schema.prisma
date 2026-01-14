@@ -1,0 +1,75 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../src/common/prisma/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Users {
+  user_id  Int     @id @default(autoincrement())
+  email    String  @unique @db.VarChar(255)
+  password String  @db.VarChar(255)
+  fullName String? @db.VarChar(255)
+  age      Int?
+  avatar   String? @db.VarChar(255)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+
+  Images     Images[]
+  Comments   Comments[]
+  SaveImages SaveImages[]
+}
+
+model Images {
+  image_id          Int     @id @default(autoincrement())
+  image_name        String  @db.VarChar(255)
+  image_url         String  @db.VarChar(255)
+  image_description String? @db.VarChar(255)
+
+  userId Int
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+
+  Users      Users        @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  Comments   Comments[]
+  SaveImages SaveImages[]
+}
+
+model Comments {
+  comment_id Int    @id @default(autoincrement())
+  content    String @db.VarChar(255)
+
+  userId  Int
+  imageId Int
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+
+  Users  Users  @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  Images Images @relation(fields: [imageId], references: [image_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([userId])
+  @@index([imageId])
+}
+
+model SaveImages {
+  userId  Int
+  imageId Int
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+
+  Users  Users  @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  Images Images @relation(fields: [imageId], references: [image_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([userId, imageId])
+}

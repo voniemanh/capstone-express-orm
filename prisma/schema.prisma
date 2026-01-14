@@ -1,0 +1,68 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../src/common/prisma/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Users {
+  user_id    Int          @id @default(autoincrement())
+  email      String       @unique(map: "email") @db.VarChar(255)
+  password   String       @db.VarChar(255)
+  fullName   String?      @db.VarChar(255)
+  age        Int?
+  avatar     String?      @db.VarChar(255)
+  isDeleted  Boolean      @default(false)
+  createdAt  DateTime     @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime     @default(now()) @db.Timestamp(0)
+  Comments   Comments[]
+  Images     Images[]
+  SaveImages SaveImages[]
+}
+
+model Images {
+  image_id          Int          @id @default(autoincrement())
+  image_name        String       @db.VarChar(255)
+  image_url         String       @db.VarChar(255)
+  image_description String?      @db.VarChar(255)
+  userId            Int
+  isDeleted         Boolean      @default(false)
+  createdAt         DateTime     @default(now()) @db.Timestamp(0)
+  updatedAt         DateTime     @default(now()) @db.Timestamp(0)
+  Comments          Comments[]
+  Users             Users        @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_images_user")
+  SaveImages        SaveImages[]
+
+  @@index([userId], map: "fk_images_user")
+}
+
+model Comments {
+  comment_id Int      @id @default(autoincrement())
+  content    String   @db.VarChar(255)
+  userId     Int
+  imageId    Int
+  isDeleted  Boolean  @default(false)
+  createdAt  DateTime @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime @default(now()) @db.Timestamp(0)
+  Images     Images   @relation(fields: [imageId], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_image")
+  Users      Users    @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_comments_user")
+
+  @@index([imageId], map: "fk_comments_image")
+  @@index([userId], map: "fk_comments_user")
+}
+
+model SaveImages {
+  userId    Int
+  imageId   Int
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  Images    Images   @relation(fields: [imageId], references: [image_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_saveimages_image")
+  Users     Users    @relation(fields: [userId], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_saveimages_user")
+
+  @@id([userId, imageId])
+  @@index([imageId], map: "fk_saveimages_image")
+}
