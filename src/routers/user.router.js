@@ -1,5 +1,4 @@
 import express from "express";
-import { uploadDiskStorage } from "../common/multer/disk-storage.multer.js";
 import { userController } from "../controllers/user.controller.js";
 import { protect } from "../common/middleware/protect.middleware.js";
 import { uploadMemory } from "../common/multer/memory.multer.js";
@@ -64,34 +63,13 @@ userRouter.put("/me", protect, userController.updateMe);
  *         description: Xoá tài khoản thành công
  */
 userRouter.delete("/me", protect, userController.deleteMe);
-/**
- * @swagger
- * /user/avatar-local:
- *   post:
- *     summary: Upload avatar local
- *     tags: [User]
- *     security:
- *       - BearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               avatar:
- *                 type: string
- *                 format: binary
- *     responses:
- *       200:
- *         description: Upload avatar local thành công
- */
-userRouter.post(
-  "/avatar-local",
-  protect,
-  uploadDiskStorage.single("avatar"),
-  userController.avatarLocal
-);
+
+// userRouter.post(
+//   "/avatar-local",
+//   protect,
+//   uploadDiskStorage.single("avatar"),
+//   userController.avatarLocal
+// );
 /**
  * @swagger
  * /user/avatar-cloud:

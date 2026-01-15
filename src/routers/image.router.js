@@ -1,5 +1,6 @@
 import express from "express";
 import { imageController } from "../controllers/image.controller.js";
+import { uploadMemory } from "../common/multer/memory.multer.js";
 import { protect } from "../common/middleware/protect.middleware.js";
 const imageRouter = express.Router();
 
@@ -22,28 +23,32 @@ const imageRouter = express.Router();
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
- *               - image_url
+ *               - image
+ *               - image_name
  *             properties:
- *               image_url:
+ *               image:
  *                 type: string
- *                 example: "https://example.com/cat.png"
+ *                 format: binary
  *               image_name:
  *                 type: string
- *                 example: "Con mèo béo ú"
  *               image_description:
  *                 type: string
- *                 example: "Ảnh mèo dễ thương"
  *     responses:
  *       201:
  *         description: Tạo ảnh thành công
  *       401:
  *         description: Chưa đăng nhập
  */
-imageRouter.post("/", protect, imageController.createImage);
+imageRouter.post(
+  "/",
+  protect,
+  uploadMemory.single("image"),
+  imageController.createImage
+);
 /**
  * @swagger
  * /images:

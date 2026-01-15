@@ -1,47 +1,12 @@
-import fs from "fs";
-import path from "path";
 import cloudinary from "../common/cloudinary/init.cloudinary.js";
 import {
+  CLOUD_FOLDER_AVATAR,
   CLOUDINARY_NAME,
-  FOLDER_IMAGE,
 } from "../common/constant/app.constant.js";
 import { BadRequestException } from "../common/helpers/exception.helper.js";
 import { prisma } from "../common/prisma/connect.prisma.js";
 
 export const userService = {
-  async avatarLocal(req) {
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-    if (!req.file) {
-      throw new BadRequestException("Không có file");
-    }
-    await prisma.users.update({
-      where: {
-        user_id: +req.user.user_id,
-      },
-      data: {
-        avatar: req.file.filename,
-      },
-    });
-
-    //   đảm bảo 1 user - 1 avatar
-    if (req.user.avatar) {
-      // cloud
-      cloudinary.uploader.destroy(req.user.avatar);
-
-      // XOÁ LOCAL
-      // hàm join trong thư viện path sẽ cover mọi hệ điều hành
-      // window: \\
-      // macOs: //
-      const oldPath = path.join(FOLDER_IMAGE, req.user.avatar);
-      if (fs.existsSync(oldPath)) {
-        fs.unlinkSync(oldPath);
-      }
-    }
-
-    return true;
-  },
-
   async avatarCloud(req) {
     if (!req.file) {
       throw new BadRequestException("Không có file");
@@ -50,7 +15,7 @@ export const userService = {
     // Upload lên Cloudinary
     const uploadResult = await new Promise((resolve, reject) => {
       cloudinary.uploader
-        .upload_stream({ folder: FOLDER_IMAGE }, (error, result) => {
+        .upload_stream({ folder: CLOUD_FOLDER_AVATAR }, (error, result) => {
           if (error) return reject(error);
           return resolve(result);
         })
@@ -63,12 +28,9 @@ export const userService = {
       data: { avatar: uploadResult.public_id },
     });
 
-    // Xoá avatar cũ (cloud + local)
+    // Xoá avatar cũ (cloud )
     if (req.user.avatar) {
       cloudinary.uploader.destroy(req.user.avatar);
-
-      const oldPath = path.join(FOLDER_IMAGE, req.user.avatar);
-      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
     }
 
     // Trả luôn URL đầy đủ cho frontend

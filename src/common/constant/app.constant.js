@@ -8,7 +8,8 @@ export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-export const FOLDER_IMAGE = "public/images";
+export const CLOUD_FOLDER_AVATAR = "avatar";
+export const CLOUD_FOLDER_IMAGE = "image";
 
 export const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;

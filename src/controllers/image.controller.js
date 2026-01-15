@@ -5,10 +5,7 @@ export const imageController = {
   async createImage(req, res, next) {
     try {
       const userId = req.user.user_id;
-      const data = req.body;
-      console.log(data, userId);
-
-      const result = await imageService.createImage(data, userId);
+      const result = await imageService.createImage(req, userId);
 
       const response = responseSuccess(result, "Create image successfully");
       res.status(response.statusCode).json(response);
