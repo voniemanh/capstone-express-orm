@@ -75,13 +75,8 @@ export const imageService = {
   async getAllImages(query) {
     const { page, pageSize, where, index } = buildQueryPrisma(query);
 
-    const filteredWhere = {
-      ...where,
-      isDeleted: false,
-    };
-
     const images = await prisma.images.findMany({
-      where: filteredWhere,
+      where,
       skip: index,
       take: pageSize,
       orderBy: { createdAt: "asc" },
@@ -93,7 +88,7 @@ export const imageService = {
     });
 
     const total = await prisma.images.count({
-      where: filteredWhere,
+      where,
     });
 
     return {
@@ -139,11 +134,14 @@ export const imageService = {
   },
 
   async getSavedImagesByUser(userId, query) {
-    const { page, pageSize, index } = buildQueryPrisma(query);
-
+    const { page, pageSize, where, index } = buildQueryPrisma(query);
+    const filteredWhere = {
+      ...where,
+      userId: Number(userId),
+    };
     // join bảng SaveImages để lấy images đã save
     const savedImages = await prisma.saveImages.findMany({
-      where: { userId: Number(userId), isDeleted: false },
+      where: filteredWhere,
       skip: index,
       take: pageSize,
       include: { Images: true },
@@ -151,7 +149,7 @@ export const imageService = {
     });
 
     const total = await prisma.saveImages.count({
-      where: { userId: Number(userId), isDeleted: false },
+      where: filteredWhere,
     });
 
     // trả về mảng images
