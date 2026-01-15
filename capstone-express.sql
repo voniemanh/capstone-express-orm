@@ -82,17 +82,17 @@ INSERT INTO `Comments` (`comment_id`, `content`, `userId`, `imageId`, `isDeleted
 (2, 'Ảnh này dễ thương ghê', 2, 1, 0, '2026-01-13 11:59:35', '2026-01-13 11:59:35'),
 (3, 'Sửa lại cute', 3, 1, 0, '2026-01-13 12:50:50', '2026-01-14 01:09:54'),
 (4, 'Sửa lại nữa nữa nè', 3, 1, 0, '2026-01-13 13:18:29', '2026-01-14 03:40:58'),
-(5, 'Ảnh này ute', 3, 1, 1, '2026-01-14 00:49:19', '2026-01-14 01:31:00'),
-(6, 'Ảnh này ute', 3, 1, 0, '2026-01-14 00:52:17', '2026-01-14 00:52:17'),
+(5, 'Ảnh này cute', 3, 1, 1, '2026-01-14 00:49:19', '2026-01-14 01:31:00'),
+(6, 'Ảnh này cute', 3, 1, 0, '2026-01-14 00:52:17', '2026-01-14 00:52:17'),
 (7, 'comment anh', 3, 2, 0, '2026-01-14 01:33:23', '2026-01-14 01:33:23'),
 (8, 'comment anhhhh', 5, 2, 0, '2026-01-14 06:38:11', '2026-01-14 06:38:11');
 
 INSERT INTO `Images` (`image_id`, `image_name`, `image_url`, `image_description`, `userId`, `isDeleted`, `createdAt`, `updatedAt`) VALUES
-(1, 'papa image update', 'https://example.com/papa.png', 'papa ga update shita image', 6, 1, '2026-01-13 11:46:19', '2026-01-14 07:06:56'),
+(1, 'papa image update', 'https://example.com/papa.png', 'panda ga update shita image', 6, 1, '2026-01-13 11:46:19', '2026-01-14 07:06:56'),
 (2, 'Con mèo béo ú', 'https://example.com/cat.png', 'Ảnh mèo dễ thương', 3, 1, '2026-01-14 00:52:47', '2026-01-14 01:38:56'),
 (3, 'con cho con', 'https://example.com/cat.png', 'Ảnh cho dễ thương', 3, 0, '2026-01-14 01:40:27', '2026-01-14 01:40:27'),
-(4, 'papa image update', 'https://example.com/papa.png', 'papa ga update shita image', 6, 1, '2026-01-14 07:05:48', '2026-01-14 07:08:54'),
-(5, 'papa image', 'https://example.com/papa.png', 'papa ga tsuika shita image', 6, 0, '2026-01-14 10:57:42', '2026-01-14 10:57:42');
+(4, 'papa image update', 'https://example.com/papa.png', 'panda ga update shita image', 6, 1, '2026-01-14 07:05:48', '2026-01-14 07:08:54'),
+(5, 'papa image', 'https://example.com/papa.png', 'panda ga tsuika shita image', 6, 0, '2026-01-14 10:57:42', '2026-01-14 10:57:42');
 
 INSERT INTO `SaveImages` (`userId`, `imageId`, `isDeleted`, `createdAt`, `updatedAt`) VALUES
 (2, 1, 0, '2026-01-13 12:32:34', '2026-01-13 12:32:34'),
