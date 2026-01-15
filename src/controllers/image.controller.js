@@ -16,9 +16,9 @@ export const imageController = {
 
   async getAllImages(req, res, next) {
     try {
-      const { page, pageSize } = req.query;
+      const query = req.query;
 
-      const result = await imageService.getAllImages({ page, pageSize });
+      const result = await imageService.getAllImages(query);
 
       const response = responseSuccess(result, "Get all images successfully");
       res.status(response.statusCode).json(response);

@@ -75,8 +75,13 @@ export const imageService = {
   async getAllImages(query) {
     const { page, pageSize, where, index } = buildQueryPrisma(query);
 
+    const filteredWhere = {
+      ...where,
+      isDeleted: false,
+    };
+
     const images = await prisma.images.findMany({
-      where,
+      where: filteredWhere,
       skip: index,
       take: pageSize,
       orderBy: { createdAt: "asc" },
@@ -88,8 +93,9 @@ export const imageService = {
     });
 
     const total = await prisma.images.count({
-      where,
+      where: filteredWhere,
     });
+
     return {
       images,
       page,
