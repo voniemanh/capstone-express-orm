@@ -175,17 +175,18 @@ export const imageService = {
 
     return deleted;
   },
-  async searchImage({ keyword, page, pageSize }) {
-    const { where, index } = buildQueryPrisma({ page, pageSize });
-
+  async searchImage(query) {
+    const { page, pageSize, where, index } = buildQueryPrisma(query);
+    const filteredWhere = {
+      ...where,
+      OR: [
+        { image_name: { contains: query.keyword } },
+        { image_description: { contains: query.keyword } },
+      ],
+    };
     const images = await prisma.images.findMany({
       where: {
-        ...where,
-        isDeleted: false,
-        OR: [
-          { image_name: { contains: keyword } },
-          { image_description: { contains: keyword } },
-        ],
+        ...filteredWhere,
       },
       skip: index,
       take: pageSize,
@@ -194,11 +195,7 @@ export const imageService = {
 
     const total = await prisma.images.count({
       where: {
-        ...where,
-        OR: [
-          { image_name: { contains: keyword } },
-          { image_description: { contains: keyword } },
-        ],
+        ...filteredWhere,
       },
     });
     return {

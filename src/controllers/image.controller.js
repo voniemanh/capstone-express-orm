@@ -111,11 +111,9 @@ export const imageController = {
   },
   async searchImage(req, res, next) {
     try {
-      const { keyword } = req.query;
+      const query = req.query;
 
-      const result = await imageService.searchImage({
-        keyword,
-      });
+      const result = await imageService.searchImage(query);
 
       const response = responseSuccess(result, "Search images successfully");
       res.status(response.statusCode).json(response);
