@@ -20,7 +20,7 @@ export const authService = {
     // nếu người dùng đã tồn tại thì trả lỗi 400 => không cho đăng ký
     if (userExist) {
       throw new BadRequestException(
-        "Người dùng đã tồn tại, vui lòng đăng nhập"
+        "User with this email already exists. Please use another email."
       );
     }
 
@@ -54,14 +54,14 @@ export const authService = {
       },
     });
     if (!userExits) {
-      throw new BadRequestException("Xin vui lòng đăng ký trước khi đăng nhập");
+      throw new BadRequestException("Please register before logging in");
       // throw new BadRequestException("Account Invalid")
     }
 
     // kiểm tra password
     const isPassword = bcrypt.compareSync(password, userExits.password);
     if (!isPassword) {
-      throw new BadRequestException("Mật khẩu chưa chính xác");
+      throw new BadRequestException("Incorrect password");
       // throw new BadRequestException("Account Invalid")
     }
 
@@ -109,7 +109,7 @@ export const authService = {
       },
     });
     if (!userExits) {
-      throw new UnauthorizedException("Không có người dùng");
+      throw new UnauthorizedException("User not found");
     }
 
     // Trường hợp: trả 2 token

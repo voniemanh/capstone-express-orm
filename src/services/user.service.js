@@ -9,7 +9,7 @@ import { prisma } from "../common/prisma/connect.prisma.js";
 export const userService = {
   async avatarCloud(req) {
     if (!req.file) {
-      throw new BadRequestException("Không có file");
+      throw new BadRequestException("Image file is required");
     }
 
     // Upload lên Cloudinary

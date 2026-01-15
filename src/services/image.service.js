@@ -17,7 +17,7 @@ export const imageService = {
       throw new BadRequestException("image_name is required");
     }
     if (!req.file) {
-      throw new BadRequestException("Không có file");
+      throw new BadRequestException("Image file is required");
     }
 
     // Upload lên Cloudinary
@@ -109,7 +109,7 @@ export const imageService = {
     });
 
     if (!image || image.isDeleted) {
-      throw new NotFoundException(`Không tìm thấy image #${image_id}`);
+      throw new NotFoundException(`Image #${image_id} not found`);
     }
 
     return image;
@@ -160,7 +160,7 @@ export const imageService = {
     });
 
     if (!image || image.isDeleted) {
-      throw new NotFoundException(`Không tìm thấy image #${image_id}`);
+      throw new NotFoundException(`Image #${image_id} not found`);
     }
     const deleted = await prisma.images.update({
       where: { image_id: Number(image_id) },
