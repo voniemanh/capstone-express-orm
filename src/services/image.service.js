@@ -162,7 +162,9 @@ export const imageService = {
     const image = await prisma.images.findUnique({
       where: { image_id: Number(image_id) },
     });
-
+    if (image.userId !== Number(userId)) {
+      throw new BadRequestException("You are not allowed to delete this image");
+    }
     if (!image || image.isDeleted) {
       throw new NotFoundException(`Image #${image_id} not found`);
     }
