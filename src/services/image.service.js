@@ -51,18 +51,18 @@ export const imageService = {
     console.log("newImage", newImage);
     return newImage;
   },
-  async updateImage(data, userId, { image_id }) {
-    const { image_name, image_url, image_description } = data;
 
-    if (!image_url || !image_name) {
-      throw new BadRequestException("image_url or image_name are required");
+  async updateImage(data, userId, { image_id }) {
+    const { image_name, image_description } = data;
+
+    if (userId !== data.userId) {
+      throw new BadRequestException("You are not allowed to update this image");
     }
 
     const updatedImage = await prisma.images.update({
       where: { image_id: Number(image_id) },
       data: {
         image_name,
-        image_url,
         image_description,
         userId: Number(userId),
       },
