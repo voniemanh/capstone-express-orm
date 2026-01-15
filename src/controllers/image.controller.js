@@ -14,6 +14,22 @@ export const imageController = {
     }
   },
 
+  async updateImage(req, res, next) {
+    try {
+      const userId = req.user.user_id;
+      const data = req.body;
+      const { image_id } = req.params;
+      console.log(data, userId, { image_id });
+
+      const result = await imageService.updateImage(data, userId, { image_id });
+
+      const response = responseSuccess(result, "Update image successfully");
+      res.status(response.statusCode).json(response);
+    } catch (err) {
+      next(err);
+    }
+  },
+
   async getAllImages(req, res, next) {
     try {
       const query = req.query;
@@ -71,21 +87,6 @@ export const imageController = {
         result,
         `Get saved images by user #${userId} successfully`
       );
-      res.status(response.statusCode).json(response);
-    } catch (err) {
-      next(err);
-    }
-  },
-  async updateImage(req, res, next) {
-    try {
-      const userId = req.user.user_id;
-      const data = req.body;
-      const { image_id } = req.params;
-      console.log(data, userId, { image_id });
-
-      const result = await imageService.updateImage(data, userId, { image_id });
-
-      const response = responseSuccess(result, "Update image successfully");
       res.status(response.statusCode).json(response);
     } catch (err) {
       next(err);
