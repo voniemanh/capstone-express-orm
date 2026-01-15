@@ -4,7 +4,7 @@ import cors from "cors";
 import { appErorr } from "./src/common/helpers/handle-error.helper.js";
 import { NotFoundException } from "./src/common/helpers/exception.helper.js";
 import { initGoogleStrategy } from "./src/common/passport/login-google.passport.js";
-import { setupSwagger } from "./src/common/swagger/swagger.config.js";
+// import { setupSwagger } from "./src/common/swagger/swagger.config.js";
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(
 );
 
 initGoogleStrategy();
-setupSwagger(app);
+// setupSwagger(app);
 
 app.use("/api", rootRouter);
 app.use((req, res, next) => {
