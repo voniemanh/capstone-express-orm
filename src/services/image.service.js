@@ -14,7 +14,7 @@ export const imageService = {
   async createImage(req, userId) {
     const { image_name, image_description } = req.body;
     if (!image_name) {
-      throw new BadRequestException("image_name is required");
+      throw new BadRequestException("Image name is required");
     }
     if (!req.file) {
       throw new BadRequestException("Image file is required");
