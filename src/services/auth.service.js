@@ -37,9 +37,7 @@ export const authService = {
       },
     });
 
-    console.log({ email, password });
-
-    return true;
+    return userNew;
   },
 
   async login(req) {
@@ -70,7 +68,7 @@ export const authService = {
 
     const tokens = tokenService.createTokens(userExits.user_id);
 
-    console.log({ email, password, userExits });
+    // console.log({ email, password, userExits });
 
     return tokens;
   },
