@@ -29,10 +29,15 @@ export const commentService = {
     return newComment;
   },
 
-  async findCommentsByImage(query) {
+  async findCommentsByImage({ imageId, query }) {
     const { page, pageSize, where, index } = buildQueryPrisma(query);
+    const filterWhere = {
+      ...where,
+      imageId: Number(imageId),
+      isDeleted: false,
+    };
     const comments = await prisma.comments.findMany({
-      where,
+      where: filterWhere,
       skip: index,
       take: pageSize,
       orderBy: { createdAt: "asc" },
@@ -43,8 +48,8 @@ export const commentService = {
       },
     });
 
-    const total = await prisma.images.count({
-      where,
+    const total = await prisma.comments.count({
+      where: filterWhere,
     });
     return {
       comments,

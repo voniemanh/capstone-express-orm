@@ -23,9 +23,13 @@ export const commentController = {
   // Lấy danh sách comment theo image
   async findCommentsByImage(req, res, next) {
     try {
+      const { imageId } = req.params;
       const query = req.query;
 
-      const result = await commentService.findCommentsByImage(query);
+      const result = await commentService.findCommentsByImage({
+        imageId: Number(imageId),
+        query,
+      });
 
       const response = responseSuccess(result, `Get all comments successfully`);
       res.status(response.statusCode).json(response);
