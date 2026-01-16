@@ -6,7 +6,7 @@ export const saveController = {
     try {
       const imageId =
         req.query.imageId || req.params.imageId || req.body.imageId;
-      const userId = req.user.user_id;
+      const userId = +req.user.user_id;
       const result = await saveService.saveImage(userId, Number(imageId));
       const response = responseSuccess(result, `Save image successfully`);
       res.status(response.statusCode).json(response);
@@ -19,7 +19,7 @@ export const saveController = {
     try {
       const imageId =
         req.query.imageId || req.params.imageId || req.body.imageId;
-      const userId = req.user.user_id;
+      const userId = +req.user.user_id;
       const result = await saveService.unsave(userId, Number(imageId));
       const response = responseSuccess(result, `Unsave successfully`);
       res.status(response.statusCode).json(response);
@@ -31,7 +31,7 @@ export const saveController = {
   async checkSavedOrNot(req, res, next) {
     try {
       const { imageId } = req.params;
-      const userId = req.user.user_id;
+      const userId = +req.user.user_id;
       const result = await saveService.checkSavedOrNot(userId, Number(imageId));
       const response = responseSuccess(
         result,
