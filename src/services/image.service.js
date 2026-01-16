@@ -11,14 +11,51 @@ import {
 import { prisma } from "../common/prisma/connect.prisma.js";
 
 export const imageService = {
-  async createImage(req, userId) {
-    const { image_name, image_description } = req.body;
-    if (!image_name) {
-      throw new BadRequestException("Image name is required");
-    }
+  // Validation queries
+  validateImageData(req) {
     if (!req.file) {
       throw new BadRequestException("Image file is required");
     }
+    if (req.file.size > 5 * 1024 * 1024) {
+      throw new BadRequestException("Image file size must be less than 5MB");
+    }
+    return true;
+  },
+  async validateImageExistence(imageId) {
+    const image = await prisma.images.findUnique({
+      where: { image_id: Number(imageId) },
+    });
+    if (!image || image.isDeleted) {
+      throw new NotFoundException(`Image #${imageId} not found`);
+    }
+    return image;
+  },
+  validateImageName(image_name) {
+    if (!image_name) {
+      throw new BadRequestException("Image name is required");
+    }
+    if (image_name.length === 0 || image_name.length > 100) {
+      throw new BadRequestException(
+        "Image name must be between 1 and 100 characters"
+      );
+    }
+    return image_name;
+  },
+  validateImageDescription(image_description) {
+    if (image_description && image_description.length > 200) {
+      throw new BadRequestException(
+        "Image description is too long, maximum 200 characters"
+      );
+    }
+    return image_description;
+  },
+
+  //CRUD services
+  async createImage(req, userId) {
+    const { image_name, image_description } = req.body;
+    this.validateImageData(req);
+    this.validateImageName(image_name);
+    this.validateImageDescription(image_description);
 
     // Upload lên Cloudinary
     const uploadResult = await new Promise((resolve, reject) => {
@@ -54,12 +91,13 @@ export const imageService = {
   async updateImage(data, userId, { image_id }) {
     const { image_name, image_description } = data;
 
-    const image = await prisma.images.findUnique({
-      where: { image_id: Number(image_id) },
-    });
-
+    const image = await this.validateImageExistence(image_id);
+    this.validateImageName(image_name);
+    this.validateImageDescription(image_description);
     if (userId !== image.userId) {
-      throw new BadRequestException("You are not allowed to update this image");
+      throw new BadRequestException(
+        "You are not allowed to update image for another user"
+      );
     }
 
     const updatedImage = await prisma.images.update({
@@ -161,15 +199,14 @@ export const imageService = {
   },
 
   async removeImage(image_id, userId) {
-    const image = await prisma.images.findUnique({
-      where: { image_id: Number(image_id) },
-    });
+    const image = await this.validateImageExistence(image_id);
     if (image.userId !== Number(userId)) {
       throw new BadRequestException("You are not allowed to delete this image");
     }
-    if (!image || image.isDeleted) {
+    if (image.isDeleted) {
       throw new NotFoundException(`Image #${image_id} not found`);
     }
+
     const deleted = await prisma.images.update({
       where: { image_id: Number(image_id) },
       data: { isDeleted: true, updatedAt: new Date() },
