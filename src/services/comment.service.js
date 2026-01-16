@@ -6,16 +6,32 @@ import {
 import { buildQueryPrisma } from "../common/helpers/build-query-prisma.helper.js";
 
 export const commentService = {
+  validateContent(content) {
+    const trimmedContent = content.trim();
+    if (!trimmedContent) {
+      throw new BadRequestException("Content không được để trống");
+    }
+    if (trimmedContent.length > 200) {
+      throw new BadRequestException("Content quá dài, tối đa 200 ký tự");
+    }
+    return trimmedContent;
+  },
+  async validateImageExistence(imageId) {
+    const image = await prisma.images.findUnique({
+      where: { image_id: Number(imageId) },
+    });
+    if (!image || image.isDeleted) {
+      throw new NotFoundException(`Image #${imageId} not found`);
+    }
+    return image;
+  },
   async createComment(data, userId) {
     const { content, imageId } = data;
-
-    if (!content || !imageId) {
-      throw new BadRequestException("imageId or content are required");
-    }
-
+    const trimmedContent = this.validateContent(content);
+    await this.validateImageExistence(imageId);
     const newComment = await prisma.comments.create({
       data: {
-        content,
+        content: trimmedContent,
         imageId: Number(imageId),
         userId: Number(userId),
       },
@@ -31,6 +47,7 @@ export const commentService = {
 
   async findCommentsByImage({ imageId, query }) {
     const { page, pageSize, where, index } = buildQueryPrisma(query);
+    await this.validateImageExistence(imageId);
     const filterWhere = {
       ...where,
       imageId: Number(imageId),
@@ -51,6 +68,7 @@ export const commentService = {
     const total = await prisma.comments.count({
       where: filterWhere,
     });
+
     return {
       comments,
       page,
@@ -67,16 +85,17 @@ export const commentService = {
     if (!comment || comment.isDeleted) {
       throw new NotFoundException(`Comment #${commentId} not found`);
     }
-
     if (comment.userId !== Number(userId)) {
       throw new BadRequestException(
         "You are not allowed to update this comment"
       );
     }
+    const trimmedContent = this.validateContent(content);
+    await this.validateImageExistence(comment.imageId);
 
     const updated = await prisma.comments.update({
       where: { comment_id: Number(commentId) },
-      data: { content, updatedAt: new Date() },
+      data: { content: trimmedContent, updatedAt: new Date() },
     });
 
     return updated;
