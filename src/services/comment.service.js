@@ -6,6 +6,7 @@ import {
 import { buildQueryPrisma } from "../common/helpers/build-query-prisma.helper.js";
 
 export const commentService = {
+  // Validation queries
   validateContent(content) {
     const trimmedContent = content.trim();
     if (!trimmedContent) {
@@ -25,6 +26,24 @@ export const commentService = {
     }
     return image;
   },
+  async validateComment(commentId, userId, action = "update") {
+    const comment = await prisma.comments.findUnique({
+      where: { comment_id: Number(commentId) },
+    });
+
+    if (!comment || comment.isDeleted) {
+      throw new NotFoundException(`Comment #${commentId} not found`);
+    }
+
+    if (comment.userId !== Number(userId)) {
+      throw new BadRequestException(
+        `You are not allowed to ${action} this comment`
+      );
+    }
+
+    return comment;
+  },
+  // CRUD services
   async createComment(data, userId) {
     const { content, imageId } = data;
     const trimmedContent = this.validateContent(content);
@@ -68,7 +87,6 @@ export const commentService = {
     const total = await prisma.comments.count({
       where: filterWhere,
     });
-
     return {
       comments,
       page,
@@ -78,18 +96,7 @@ export const commentService = {
   },
 
   async updateComment({ commentId, content }, userId) {
-    const comment = await prisma.comments.findUnique({
-      where: { comment_id: Number(commentId) },
-    });
-
-    if (!comment || comment.isDeleted) {
-      throw new NotFoundException(`Comment #${commentId} not found`);
-    }
-    if (comment.userId !== Number(userId)) {
-      throw new BadRequestException(
-        "You are not allowed to update this comment"
-      );
-    }
+    const comment = await this.validateComment(commentId, userId, "update");
     const trimmedContent = this.validateContent(content);
     await this.validateImageExistence(comment.imageId);
 
@@ -102,20 +109,7 @@ export const commentService = {
   },
 
   async removeComment({ commentId }, userId) {
-    const comment = await prisma.comments.findUnique({
-      where: { comment_id: Number(commentId) },
-    });
-
-    if (!comment || comment.isDeleted) {
-      throw new NotFoundException(`Comment #${commentId} not found`);
-    }
-
-    if (comment.userId !== Number(userId)) {
-      throw new BadRequestException(
-        "You are not allowed to delete this comment"
-      );
-    }
-
+    await this.validateComment(commentId, userId, "remove");
     const removed = await prisma.comments.update({
       where: { comment_id: Number(commentId) },
       data: { isDeleted: true, updatedAt: new Date() },
