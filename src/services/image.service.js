@@ -48,14 +48,17 @@ export const imageService = {
         },
       },
     });
-    console.log("newImage", newImage);
     return newImage;
   },
 
   async updateImage(data, userId, { image_id }) {
     const { image_name, image_description } = data;
 
-    if (userId !== data.userId) {
+    const image = await prisma.images.findUnique({
+      where: { image_id: Number(image_id) },
+    });
+
+    if (userId !== image.userId) {
       throw new BadRequestException("You are not allowed to update this image");
     }
 
@@ -67,7 +70,6 @@ export const imageService = {
         userId: Number(userId),
       },
     });
-    console.log("updatedImage", updatedImage);
 
     return updatedImage;
   },
