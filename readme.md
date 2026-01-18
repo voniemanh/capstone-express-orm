@@ -39,13 +39,24 @@ Hệ thống sử dụng JWT để xác thực người dùng.
 
 ### 🔑 Authentication
 
-| Method | Endpoint              | Mô tả                |
-| ------ | --------------------- | -------------------- |
-| POST   | `/auth/register`      | Đăng ký              |
-| POST   | `/auth/login`         | Đăng nhập            |
-| POST   | `/auth/refresh-token` | Cấp lại access token |
+| Method | Endpoint                | Mô tả                            |
+| ------ | ----------------------- | -------------------------------- |
+| POST   | `/auth/register`        | Đăng ký tài khoản                |
+| POST   | `/auth/login`           | Đăng nhập bằng email & password  |
+| POST   | `/auth/refresh-token`   | Cấp lại access token             |
+| GET    | `/auth/google`          | Đăng nhập bằng Google            |
+| GET    | `/auth/google-callback` | Google redirect sau khi xác thực |
 
 ---
+
+### 👤 User
+
+| Method | Endpoint             | Mô tả                       |
+| ------ | -------------------- | --------------------------- |
+| GET    | `/user/me`           | Lấy thông tin user hiện tại |
+| PUT    | `/user/me`           | Cập nhật thông tin user     |
+| DELETE | `/user/me`           | Xoá tài khoản user          |
+| POST   | `/user/avatar-cloud` | Upload avatar (cloud)       |
 
 ### 🖼 Image
 
