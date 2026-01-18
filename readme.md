@@ -60,36 +60,36 @@ Hệ thống sử dụng JWT để xác thực người dùng.
 
 ### 🖼 Image
 
-| Method | Endpoint               | Mô tả                      |
-| ------ | ---------------------- | -------------------------- |
-| POST   | `/images`              | Upload hình ảnh            |
-| GET    | `/images`              | Lấy danh sách hình ảnh     |
-| GET    | `/images/search`       | Tìm kiếm hình ảnh          |
-| GET    | `/images/user-created` | Hình ảnh người dùng đã tạo |
-| GET    | `/images/user-saved`   | Hình ảnh người dùng đã lưu |
-| PUT    | `/images/:id`          | Cập nhật hình ảnh          |
-| DELETE | `/images/:id`          | Xóa hình ảnh               |
+| Method | Endpoint                            | Mô tả                      |
+| ------ | ----------------------------------- | -------------------------- |
+| POST   | `/images`                           | Upload hình ảnh            |
+| GET    | `/images`                           | Lấy danh sách hình ảnh     |
+| GET    | `/images/search`                    | Tìm kiếm hình ảnh          |
+| GET    | `/images/user/:userId/user-created` | Hình ảnh người dùng đã tạo |
+| GET    | `/images/user/:userId/user-saved`   | Hình ảnh người dùng đã lưu |
+| PUT    | `/images/:image_id`                 | Cập nhật hình ảnh          |
+| DELETE | `/images/:image_id`                 | Xóa hình ảnh               |
 
 ---
 
 ### 💬 Comment
 
-| Method | Endpoint             | Mô tả                       |
-| ------ | -------------------- | --------------------------- |
-| POST   | `/comments`          | Tạo bình luận               |
-| GET    | `/comments/:imageId` | Lấy bình luận theo hình ảnh |
-| PUT    | `/comments/:id`      | Cập nhật bình luận          |
-| DELETE | `/comments/:id`      | Xóa bình luận               |
+| Method | Endpoint                | Mô tả                       |
+| ------ | ----------------------- | --------------------------- |
+| POST   | `/comments`             | Tạo bình luận               |
+| GET    | `/comments/:imageId`    | Lấy bình luận theo hình ảnh |
+| PUT    | `/comments/:comment_id` | Cập nhật bình luận          |
+| DELETE | `/comments/:comment_id` | Xóa bình luận               |
 
 ---
 
 ### ⭐ Save Image
 
-| Method | Endpoint               | Mô tả           |
-| ------ | ---------------------- | --------------- |
-| POST   | `/images/:id/save`     | Lưu hình ảnh    |
-| DELETE | `/images/:id/save`     | Bỏ lưu hình ảnh |
-| GET    | `/images/:id/is-saved` | Kiểm tra đã lưu |
+| Method | Endpoint                 | Mô tả           |
+| ------ | ------------------------ | --------------- |
+| POST   | `/images/:imageId`       | Lưu hình ảnh    |
+| DELETE | `/images/:imageId`       | Bỏ lưu hình ảnh |
+| GET    | `/images/check/:imageId` | Kiểm tra đã lưu |
 
 ---
 
