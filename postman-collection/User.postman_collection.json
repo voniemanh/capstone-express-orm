@@ -1,377 +1,371 @@
 {
-	"info": {
-		"_postman_id": "ebf0658d-bad6-429a-9ef1-c51cc96bb7f8",
-		"name": "User",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "50016664",
-		"_collection_link": "https://voniemanh-2482568.postman.co/workspace/capstone-express-orm~9545a5ab-92b6-499a-9932-06bea9d119fd/collection/50016664-ebf0658d-bad6-429a-9ef1-c51cc96bb7f8?action=share&source=collection_link&creator=50016664"
-	},
-	"item": [
-		{
-			"name": "Lấy thông tin user hiện tại",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{domain}}/user/me",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"user",
-						"me"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Thông tin user hiện tại",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/me",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"me"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Cập nhật thông tin user hiện tại",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"fullName\": \"panda\",\n  \"age\": 30,\n  \"email\": \"st3@gmail.com\"\n}",
-					"options": {
-						"raw": {
-							"headerFamily": "json",
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{domain}}/user/me",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"user",
-						"me"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "User cập nhật thành công",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"fullName\": \"string\",\n  \"age\": 7126,\n  \"email\": \"string\"\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/user/me",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"me"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Xoá tài khoản user hiện tại",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{domain}}/user/me",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"user",
-						"me"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Xoá tài khoản thành công",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/user/me",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"me"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Upload avatar cloud",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "multipart/form-data"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "avatar",
-							"type": "file",
-							"src": "postman-cloud:///1f0f1b77-b5d0-4bd0-a49b-d775b46f2068"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{domain}}/user/avatar-cloud",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"user",
-						"avatar-cloud"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Upload avatar cloud thành công",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "avatar",
-									"type": "file",
-									"src": []
-								}
-							]
-						},
-						"url": {
-							"raw": "{{baseUrl}}/user/avatar-cloud",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"user",
-								"avatar-cloud"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "ebf0658d-bad6-429a-9ef1-c51cc96bb7f8",
+    "name": "User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50016664",
+    "_collection_link": "https://go.postman.co/collection/50016664-ebf0658d-bad6-429a-9ef1-c51cc96bb7f8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Lấy thông tin user hiện tại",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/user/me",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "user",
+            "me"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Thông tin user hiện tại",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "me"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Cập nhật thông tin user hiện tại",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "{{domain}}/user/me",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "user",
+            "me"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "User cập nhật thành công",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"string\",\n  \"age\": 7126,\n  \"email\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "me"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Xoá tài khoản user hiện tại",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/user/me",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "user",
+            "me"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Xoá tài khoản thành công",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/user/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "me"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Upload avatar cloud",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "avatar",
+              "type": "file",
+              "src": "postman-cloud:///1f0e77cd-822d-4dd0-87aa-8382d4897051"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{domain}}/user/avatar-cloud",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "user",
+            "avatar-cloud"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Upload avatar cloud thành công",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/avatar-cloud",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "avatar-cloud"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
 }

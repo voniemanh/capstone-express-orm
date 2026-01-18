@@ -1,512 +1,512 @@
 {
-	"info": {
-		"_postman_id": "f0f59513-c7e2-437c-8cf1-e144910fc151",
-		"name": "Saves",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "50016664",
-		"_collection_link": "https://voniemanh-2482568.postman.co/workspace/capstone-express-orm~9545a5ab-92b6-499a-9932-06bea9d119fd/collection/50016664-f0f59513-c7e2-437c-8cf1-e144910fc151?action=share&source=collection_link&creator=50016664"
-	},
-	"item": [
-		{
-			"name": "Check image saved or not",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{domain}}/save/check/:imageId",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"save",
-						"check",
-						":imageId"
-					],
-					"variable": [
-						{
-							"key": "imageId",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Check result",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/check/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								"check",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"saved\": true\n}"
-				},
-				{
-					"name": "Unauthorized",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/check/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								"check",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Image not found",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/check/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								"check",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Unsave image",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{domain}}/save/:imageId",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"save",
-						":imageId"
-					],
-					"variable": [
-						{
-							"key": "imageId",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Unsave successfully",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Unauthorized",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Image not found",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Save image",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{accessToken}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{domain}}/save/:imageId",
-					"host": [
-						"{{domain}}"
-					],
-					"path": [
-						"save",
-						":imageId"
-					],
-					"variable": [
-						{
-							"key": "imageId",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Unsave successfully",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Unauthorized",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Image not found",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer <token>",
-								"description": "Added as a part of security scheme: bearer"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/save/:imageId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"save",
-								":imageId"
-							],
-							"variable": [
-								{
-									"key": "imageId",
-									"value": "5895"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "f0f59513-c7e2-437c-8cf1-e144910fc151",
+    "name": "Saves",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50016664",
+    "_collection_link": "https://go.postman.co/collection/50016664-f0f59513-c7e2-437c-8cf1-e144910fc151?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Check image saved or not",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{domain}}/save/check/:imageId",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "save",
+            "check",
+            ":imageId"
+          ],
+          "variable": [
+            {
+              "key": "imageId",
+              "value": "6"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Check result",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/check/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                "check",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"saved\": true\n}"
+        },
+        {
+          "name": "Unauthorized",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/check/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                "check",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Image not found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/check/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                "check",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Unsave image",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/save/:imageId",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "save",
+            ":imageId"
+          ],
+          "variable": [
+            {
+              "key": "imageId",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Unsave successfully",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Unauthorized",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Image not found",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Save image",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{domain}}/save/:imageId",
+          "host": [
+            "{{domain}}"
+          ],
+          "path": [
+            "save",
+            ":imageId"
+          ],
+          "variable": [
+            {
+              "key": "imageId",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Unsave successfully",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Unauthorized",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Image not found",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "description": "Added as a part of security scheme: bearer",
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/save/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "save",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "5895"
+                }
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
 }
